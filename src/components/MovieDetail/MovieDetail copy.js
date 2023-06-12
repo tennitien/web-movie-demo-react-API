@@ -1,14 +1,15 @@
+// https://api.themoviedb.org/3/movie/{movie_id}/videos?api_key=<api_key>
 import React, { useState } from 'react';
-import './MovieDetail.scss';
-import tmdbApi from '../../api/tmdbApi';
-import apiConfig from '../../api/apiConfig';
-import { useSelector } from 'react-redux';
-import { popupSelector } from '../../store/popup';
+import ReactDOM from 'react-dom';
 
-const MovieDetail = () => {
+import apiConfig from '../../api/apiConfig';
+import tmdbApi from '../../api/tmdbApi';
+
+import './MovieDetail.scss';
+
+export default function MovieDetail({ movie, classOpen }) {
   const [trailerKey, setTrailerKey] = useState(null);
-  const isOpen = useSelector(popupSelector.isOpen);
-  const movie = useSelector(popupSelector.movie);
+
   // Check movie
   if (!movie) return null;
 
@@ -51,7 +52,22 @@ const MovieDetail = () => {
     );
   }
 
-  return <div id='detail'></div>;
-};
+  return (
+    <>
+      <header>
+        <nav id='navbar' className='navbar'>
+          <div className='nav-link container flex-center'>
+            {/* <Link to='/' className='header-navbar'>
+            Movie App
+          </Link>
 
-export default MovieDetail;
+          <Link to='/search'>
+            <FaSearch className='icon' />
+          </Link> */}
+            lore
+          </div>
+        </nav>
+      </header>
+    </>
+  );
+}

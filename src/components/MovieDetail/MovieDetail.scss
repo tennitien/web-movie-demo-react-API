@@ -1,21 +1,4 @@
 @use '../../scss/' as *;
-#movieDetail {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
-  margin: 2rem auto;
-
-  .detail-video {
-    border: none;
-    height: 300px;
-    img {
-      object-fit: cover;
-      width: 100%;
-      height: 100%;
-      border-radius: 10px;
-    }
-  }
-}
-.hidden {
-  display: none;
+#detail {
+  @include overlay();
 }

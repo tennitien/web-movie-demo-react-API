@@ -96,7 +96,6 @@ export default function MovieList() {
           );
         })}
       </div>
-      {isShowDetail && <MovieDetail movie={movie} classOpen={selected} />}
     </>
   );
 }
