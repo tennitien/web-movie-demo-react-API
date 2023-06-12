@@ -1,0 +1,41 @@
+@use '../../scss/' as *;
+.navbar {
+  background-color: transparent;
+  height: $navbar-height;
+  @include flex(center, unset);
+  // padding: 0 2rem;
+
+  // position: sticky;
+  // top: 0;
+  // z-index: 100;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 99;
+  transition: height 0.3s ease, background-color 0.3s ease;
+
+  &.active {
+    background-color: $navbar-bg;
+  }
+}
+.nav-link {
+  width: 100%;
+  .header-navbar {
+    color: $color-danger;
+    font-weight: 700;
+    font-size: $size-header;
+  }
+
+  .icon {
+    width: 24px;
+    height: 24px;
+    // fill: $color-grey;
+    color: $color-grey;
+
+    &.active {
+      fill: $color-primary;
+      color: $black;
+    }
+  }
+}

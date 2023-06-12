@@ -1,0 +1,53 @@
+@use '../../scss/' as *;
+
+.imgList {
+  @include flex(center, unset);
+  gap: 20px;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  transition: height 0.5s linear;
+
+  &:hover .imgItem {
+    opacity: 0.7;
+  }
+
+  // scrollbar
+  &::-webkit-scrollbar {
+    height: 6px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: $color-grey;
+    border-radius: 100px;
+  }
+  &::-webkit-scrollbar-track {
+    background-color: $black;
+  }
+
+  .imgItem {
+    // Animation
+    position: relative;
+    transform: scale(1);
+    transition: all 0.3s linear;
+
+    &:hover {
+      transform: scale(1.1);
+      z-index: 10;
+      opacity: 1;
+      cursor: pointer;
+    }
+  }
+}
+.poster_path {
+  .imgItem {
+    img {
+      @include posterImg();
+    }
+  }
+}
+.backdrop_path {
+  .imgItem {
+    img {
+      @include backdropImg();
+    }
+  }
+}
