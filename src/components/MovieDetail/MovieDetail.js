@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import ReactDom from 'react-dom';
 import './MovieDetail.scss';
 import tmdbApi from '../../api/tmdbApi';
 import apiConfig from '../../api/apiConfig';
@@ -6,11 +7,12 @@ import { useSelector } from 'react-redux';
 import { popupSelector } from '../../store/popup';
 
 const MovieDetail = () => {
-  const [trailerKey, setTrailerKey] = useState(null);
   const isOpen = useSelector(popupSelector.isOpen);
-  const movie = useSelector(popupSelector.movie);
-  // Check movie
-  if (!movie) return null;
+  const id = useSelector(popupSelector.id);
+  const [trailerKey, setTrailerKey] = useState(null);
+  if (!isOpen) return null;
+  // // Check movie
+  // if (!movie) return null;
 
   // call API
   async function fetchVideo(id) {
@@ -25,7 +27,7 @@ const MovieDetail = () => {
       throw new Error(error);
     }
   }
-  fetchVideo(movie.id);
+  fetchVideo(id);
 
   // check video to render trailer or backdrop
   let video;
@@ -44,14 +46,34 @@ const MovieDetail = () => {
     video = (
       <img
         src={`${apiConfig.originalImage(
-          movie.backdrop_path || movie.poster_path
+          movie?.backdrop_path || movie?.poster_path
         )}`}
-        alt={movie.name || movie.title || ''}
+        alt={movie?.name || movie?.title || ''}
       />
     );
   }
 
-  return <div id='detail'></div>;
+  return ReactDom.createPortal(
+    <div id='detail'>
+      <div className='detialMovie'>
+        <h2 className='detail-text__title'>{movie?.name || movie?.title}</h2>
+        <hr className='mb-1 mt-1'></hr>
+        <p className='large'>
+          <strong>
+            Release Date:
+            {movie?.release_date || movie?.first_air_date}
+          </strong>
+        </p>
+        <p className='large'>
+          <strong>Vote: {movie?.vote_average}/10</strong>
+        </p>
+        <p className='mt-2'>{movie?.overview}</p>
+
+        <div className='detail-video'>{video}</div>
+      </div>
+    </div>,
+    document.getElementById('popup')
+  );
 };
 
 export default MovieDetail;

@@ -1,6 +1,8 @@
 import React, { Fragment, useState } from 'react';
 import MovieItem from './MovieItem';
 import MovieDetail from '../MovieDetail/MovieDetail';
+import { useDispatch, useSelector } from 'react-redux';
+import { popupActions, popupSelector } from '../../store/popup';
 
 const movieList = [
   {
@@ -54,47 +56,19 @@ const movieList = [
 ];
 
 export default function MovieList() {
-  const [movie, setMovie] = useState(null);
-  const [selected, setSelected] = useState(null);
-  const [isShowDetail, setIsShowDetail] = useState(false);
-  const [idCheck, setIdCheck] = useState(null);
-
-  // Find movie Click + show/hide MovieDetail (by movie.id)
-  const selectMovie = movie => {
-    if (idCheck !== movie.id) {
-      setIsShowDetail(true);
-      setMovie(movie);
-      setIdCheck(movie.id);
-    }
-    if (idCheck === movie.id) setIsShowDetail(pre => !pre);
+  const dispatch = useDispatch();
+  const open = useSelector(popupSelector.isOpen);
+  const getIdOnClick = id => {
+    dispatch(popupActions.OPEN_POPUP(id));
   };
-
-  // find List contain item onClick
-  const selectElement = element => {
-    let select = document.querySelector(`#movieDetail.${element}`);
-    select = select.classList[0];
-
-    setSelected(select);
-  };
-
   return (
     <>
       <div className='movieList'>
-        {movieList.map((movie, i) => {
-          return (
-            <Fragment key={i}>
-              <MovieItem
-                movieItem={movie}
-                selectMovie={selectMovie}
-                selectElement={selectElement}
-              />
-              <div
-                id='movieDetail'
-                className={`${movie.className} container `}
-              ></div>
-            </Fragment>
-          );
-        })}
+        {movieList.map((movie, i) => (
+          <Fragment key={i}>
+            <MovieItem movieItem={movie} getIdOnClick={getIdOnClick} />
+          </Fragment>
+        ))}
       </div>
     </>
   );

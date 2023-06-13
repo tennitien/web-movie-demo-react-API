@@ -1,20 +1,21 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import './App.scss';
 
-import Browse from './pages/browse/Browse';
+import Browse, { loader } from './pages/browse/Browse';
 import Search from './pages/search/Search';
 
+const router = createBrowserRouter([
+  { path: '/', element: <Browse />, loader: loader },
+  { path: '/search', element: <Search /> },
+]);
+////
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path='/' element={<Browse />} />
-        <Route path='/search' element={<Search />} />
-      </Routes>
-    </BrowserRouter>
+    <>
+      <RouterProvider router={router} />
+    </>
   );
 }
-
 export default App;

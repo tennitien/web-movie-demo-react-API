@@ -2,3 +2,6 @@
 #detail {
   @include overlay();
 }
+.detialMovie {
+  @include popup();
+}
