@@ -1,6 +1,6 @@
 import React from 'react';
 import apiConfig from '../../api/apiConfig';
-export default function ResultItem({ row, itemResult, selectMovie }) {
+export default function ResultItem({ row, itemResult, getMovieOnClick }) {
   return (
     <>
       <div id={row} className='row'>
@@ -9,7 +9,7 @@ export default function ResultItem({ row, itemResult, selectMovie }) {
             id={item.id}
             className='resultItem'
             key={item.id}
-            onClick={() => selectMovie(item)}
+            onClick={() => getMovieOnClick(item)}
           >
             <img
               src={apiConfig.w500Image(item.poster_path)}

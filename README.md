@@ -7,19 +7,18 @@ Link Demo:
 - [Create React App]()
 - [react router v6]()
 - [reduxjs/toolkit]()
-- [API: https://www.themoviedb.org/]()
+- [API: https://www.themoviedb.org/](https://www.themoviedb.org/)
 
 ## Review
 
+### Home
+
 ![HomePage](/img/HomePage.png)
-![Shop](/img/Shop.png)
-![Cart](/img/Cart.png)
-![SignIn](/img/SignIn.png)
 
-## Deploy Netfily && Firebase
+### Popup
 
-### After Deploy
+![PopUp](/img/Popup.png)
 
-https://web-commercial-reactjs.netlify.app/
+### Search
 
-https://react-auth-demo-78a39.web.app/
+![SearchPage](/img/SearchPage.png)

@@ -2,9 +2,10 @@ import React, { Fragment, useState } from 'react';
 
 import SearchForm from '../SearchForm/SearchForm';
 import ResultItem from './ResultItem';
-import MovieDetail from '../MovieDetail/MovieDetail';
 
 import './ResultList.scss';
+import { useDispatch } from 'react-redux';
+import { popupActions } from '../../store/popup';
 
 function ResultList(props) {
   const [results, setResults] = useState([]);
@@ -12,7 +13,7 @@ function ResultList(props) {
   const [movie, setMovie] = useState(null);
   const [isShowDetail, setIsShowDetail] = useState(false);
   const [idCheck, setIdCheck] = useState(null);
-
+  const dispatch = useDispatch();
   // Get data from SearchForm
   const onSaveSearch = data => {
     const dataFilter = data.filter(item => item.poster_path);
@@ -20,18 +21,8 @@ function ResultList(props) {
   };
 
   // Find movie Click + show/hide MovieDetail (by movie.id)
-  const selectMovie = movie => {
-    if (idCheck !== movie.id) {
-      setIsShowDetail(true);
-      setMovie(movie);
-      setIdCheck(movie.id);
-
-      // find Row contain item onClick
-      let selectEl = document.getElementById(`${movie.id}`);
-      let parentEl = selectEl.parentElement;
-      setRow(parentEl.id);
-    }
-    if (idCheck === movie.id) setIsShowDetail(pre => !pre);
+  const getMovieOnClick = movie => {
+    dispatch(popupActions.OPEN_POPUP(movie));
   };
 
   // Create a new array, each array contains 5 items
@@ -55,7 +46,7 @@ function ResultList(props) {
                 <ResultItem
                   row={item.row}
                   itemResult={item.items}
-                  selectMovie={selectMovie}
+                  getMovieOnClick={getMovieOnClick}
                 />
                 <div id='movieDetail' className={`${item.row} container`}></div>
               </Fragment>
@@ -64,8 +55,6 @@ function ResultList(props) {
         ) : (
           <p>No film available</p>
         )}
-
-        {isShowDetail && <MovieDetail movie={movie} classOpen={`${row}`} />}
       </div>
     </>
   );
