@@ -1,8 +1,7 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment } from 'react';
 import MovieItem from './MovieItem';
-import MovieDetail from '../MovieDetail/MovieDetail';
-import { useDispatch, useSelector } from 'react-redux';
-import { popupActions, popupSelector } from '../../store/popup';
+import { useDispatch } from 'react-redux';
+import { popupActions } from '../../store/popup';
 
 const movieList = [
   {
@@ -57,16 +56,15 @@ const movieList = [
 
 export default function MovieList() {
   const dispatch = useDispatch();
-  const open = useSelector(popupSelector.isOpen);
-  const getIdOnClick = id => {
-    dispatch(popupActions.OPEN_POPUP(id));
+  const getMovieOnClick = movie => {
+    dispatch(popupActions.OPEN_POPUP(movie));
   };
   return (
     <>
       <div className='movieList'>
         {movieList.map((movie, i) => (
           <Fragment key={i}>
-            <MovieItem movieItem={movie} getIdOnClick={getIdOnClick} />
+            <MovieItem movieItem={movie} getMovieOnClick={getMovieOnClick} />
           </Fragment>
         ))}
       </div>

@@ -18,16 +18,17 @@
   bottom: 0;
   left: 0;
   right: 0;
-  z-index: 100;
+  z-index: 1;
 
-  // background-color: rgba(0, 0, 0, 0.3);
-  background-color: #975555;
+  background-color: rgba(0, 0, 0, 0.7);
 }
 @mixin popup {
   position: fixed;
   top: 50%;
   right: 50%;
   transform: translate(50%, -50%);
+  height: 80vh;
+  width: 60vw;
   background-color: white;
   color: black;
   z-index: 100;

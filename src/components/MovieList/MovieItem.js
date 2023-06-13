@@ -1,34 +1,26 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 
 import apiConfig from '../../api/apiConfig';
 import tmdbApi from '../../api/tmdbApi';
 
 import './MovieItem.scss';
-import { useDispatch } from 'react-redux';
-import { popupActions } from '../../store/popup';
 
-export default function MovieItem({ movieItem, getIdOnClick }) {
+export default function MovieItem({ movieItem, getMovieOnClick }) {
   const [movieFetch, setMovieFetch] = useState([]);
-  const dispatch = useDispatch();
   // call API
-  const getMovie = async () => {
+  const getMovie = useCallback(async () => {
     try {
       const response = await tmdbApi.getMovie(movieItem.endpoint);
       setMovieFetch(response.results);
     } catch (error) {
       console.log(error.message);
     }
-  };
+  }, [movieItem.endpoint]);
 
   useEffect(() => {
     getMovie();
   }, []);
 
-  const handlePopup = e => {
-    e.preventDefault();
-    console.log('item');
-    // dispatch(popupActions.OPEN_POPUP());
-  };
   return (
     <>
       <div id={movieItem.className} className='container mt-3 '>
@@ -40,7 +32,7 @@ export default function MovieItem({ movieItem, getIdOnClick }) {
                 className='imgItem'
                 key={i}
                 data={e.id}
-                onClick={() => getIdOnClick(e.id)}
+                onClick={() => getMovieOnClick(e)}
               >
                 {/* display by type image  */}
                 <img

@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   isOpen: false,
-  id: null,
+  movie: null,
 };
 
 const popupSlice = createSlice({
@@ -11,12 +11,12 @@ const popupSlice = createSlice({
   reducers: {
     OPEN_POPUP(state, action) {
       state.isOpen = true;
-      let id = action.payload;
-      state.id = id;
+      let movie = action.payload;
+      state.movie = movie;
     },
     CLOSE_POPUP(state) {
       state.isOpen = false;
-      state.id = null;
+      state.movie = null;
     },
   },
 });
@@ -24,6 +24,6 @@ const popupSlice = createSlice({
 export const popupActions = popupSlice.actions;
 export const popupSelector = {
   isOpen: state => state.popup.isOpen,
-  id: state => state.popup.id,
+  movie: state => state.popup.movie,
 };
 export default popupSlice.reducer;

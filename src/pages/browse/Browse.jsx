@@ -18,8 +18,8 @@ function Browse() {
   }, [data, dispatch]);
   return (
     <div className='app'>
-      {/* <Navbar /> */}
-      {/* <Banner /> */}
+      <Navbar />
+      <Banner />
       <MovieList />
       <MovieDetail />
     </div>
