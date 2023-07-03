@@ -4,9 +4,11 @@ Link Demo: https://web-movie-demo-react.netlify.app/
 
 ## Build with
 
-- [Create React App]()
-- [react router v6]()
-- [reduxjs/toolkit]()
+- [Create React App](https://create-react-app.dev/)
+- [react router v6](https://reactrouter.com/en/main)
+- [reduxjs/toolkit](https://redux-toolkit.js.org/)
+- [Sass](https://sass-lang.com/)
+- Axios
 - [API: https://www.themoviedb.org/](https://www.themoviedb.org/)
 
 ## Review
